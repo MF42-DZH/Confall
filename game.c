@@ -69,8 +69,60 @@ int setblock( Field* field, int x, int y, const Block* block ) {
     }
 }
 
+int getblockcolor( Field* field, int x, int y ) {
+    Block* blk = getblock( field, x, y );
+    if ( blk != NULL ) return blk->color;
+    else return -1;
+}
+
+int gettextcolorfromid( int id ) {
+    switch ( id ) {
+        case COLOR_RED:
+            return RED;
+        case COLOR_ORANGE:
+            return ORANGE;
+        case COLOR_YELLOW:
+            return YELLOW;
+        case COLOR_GREEN:
+            return GREEN;
+        case COLOR_CYAN:
+            return CYAN;
+        case COLOR_BLUE:
+            return RED;
+        case COLOR_MAGENTA:
+            return PURPLE;
+        case COLOR_WHITE:
+            return WHITE;
+        default:
+            return BLACK;
+    }
+}
+
+int getblockcolorfromid( int id ) {
+    switch ( id ) {
+        case COLOR_RED:
+            return RED_BLOCK;
+        case COLOR_ORANGE:
+            return ORANGE_BLOCK;
+        case COLOR_YELLOW:
+            return YELLOW_BLOCK;
+        case COLOR_GREEN:
+            return GREEN_BLOCK;
+        case COLOR_CYAN:
+            return CYAN_BLOCK;
+        case COLOR_BLUE:
+            return RED_BLOCK;
+        case COLOR_MAGENTA:
+            return PURPLE_BLOCK;
+        case COLOR_WHITE:
+            return WHITE_BLOCK;
+        default:
+            return BLACK_BLOCK;
+    }
+}
+
 int getmatches( Field* field, int x, int y ) {
-    int color = getblock( field, x, y )->color;
+    int color = getblockcolor( field, x, y );
     if ( color == BLACK_BLOCK ) return 0;
     else {
         matchflagger( field, x, y, color );
@@ -114,7 +166,7 @@ int dogravity( Field* field ) {
 
         // If column is not unbroken, mark as broken
         for ( int y = FIELD_HEIGHT - 1; y >= highest; --y ) {
-            if ( getblock( field, col, y )->color == BLACK_BLOCK ) {
+            if ( getblockcolor( field, col, y ) == BLACK_BLOCK ) {
                 fullflag = 0;
                 break;
             }
@@ -177,4 +229,44 @@ int dogravity( Field* field ) {
     }
 
     return dropped | shifted;
+}
+
+const int SET_EASY[ 3 ]    = { COLOR_RED, COLOR_BLUE, COLOR_YELLOW };
+const int SET_NORMAL[ 4 ]  = { COLOR_RED, COLOR_BLUE, COLOR_YELLOW, COLOR_GREEN };
+const int SET_HARD[ 5 ]    = { COLOR_RED, COLOR_BLUE, COLOR_YELLOW, COLOR_GREEN, COLOR_ORANGE };
+const int SET_EXTREME[ 6 ] = { COLOR_RED, COLOR_BLUE, COLOR_YELLOW, COLOR_GREEN, COLOR_ORANGE, COLOR_MAGENTA };
+
+const int* getcolorset( int set ) {
+    switch ( set ) {
+        case COLORSET_EASY:
+            return SET_EASY;
+        case COLORSET_NORMAL:
+            return SET_NORMAL;
+        case COLORSET_HARD:
+            return SET_HARD;
+        case COLORSET_EXTREME:
+            return SET_EXTREME;
+        default:
+            return NULL;
+    }
+}
+
+void initrandomizer( Randomizer* randomizer, int historylength, int rolls ) {
+    inithistory( &( randomizer->history ), historylength );
+    randomizer->rolls = rolls;
+    for ( int i = 0; i < historylength; ++i ) randomizer->history.container[ i ] = -1;
+}
+
+int r_next( Randomizer* randomizer, int max ) {
+    int val;
+    for ( int roll = 0; roll < randomizer->rolls; ++roll ) {
+        val = rand() % max;
+        if ( history_contains( &( randomizer->history ), val ) ) continue;
+        else {
+            history_enqueue( &( randomizer->history ), val );
+            return val;
+        }
+    }
+
+    return val;
 }

@@ -1,5 +1,4 @@
-#include "components.h"
-#include "colrdef.h"
+#include "game.h"
 
 #include <unistd.h>
 

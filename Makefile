@@ -1,4 +1,4 @@
-OBJS   = main.o colrdef.o game.o
+OBJS   = main.o colrdef.o game.o history.o
 CC     = gcc
 CFLAGS  = -std=c18 -Wall -Wno-unused-function
 
