@@ -24,7 +24,7 @@ void initialisecolours( void ) {
     init_pair( PURPLE_BLOCK, COLOR_MAGENTA, COLOR_MAGENTA );
     init_pair( WHITE_BLOCK , COLOR_WHITE  , COLOR_WHITE   );
 
-    init_pair( BLACK , COLOR_BLACK  , COLOR_BLACK );
+    init_pair( BLACK , COLOR_BLACK  , COLOR_WHITE );
     init_pair( RED   , COLOR_RED    , COLOR_BLACK );
     init_pair( ORANGE, COLOR_ORANGE , COLOR_BLACK );
     init_pair( YELLOW, COLOR_YELLOW , COLOR_BLACK );
