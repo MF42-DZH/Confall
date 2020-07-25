@@ -1,7 +1,7 @@
 # Confall
 A collapse clone for the console.
 
-Compatible with Unix and Windows systems. Requires `ncurses` on Unix and `pdcurses` on Windows (may require MinGW GCC). Tested with TDM-GCC on Windows and GCC on Unix.
+Compatible with Unix and Windows systems. Requires `ncurses` on Unix and `pdcurses` on Windows (may require MinGW GCC). Tested with TDM-GCC on Windows and GCC on Unix. On Windows, it requires a compiler distribution with an implementation of `<unistd.h>`.
 
 ## Status
 
