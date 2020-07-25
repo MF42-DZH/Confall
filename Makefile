@@ -1,6 +1,6 @@
-OBJS   = main.o colrdef.o game.o history.o
+OBJS   = main.o colrdef.o game.o history.o renderer.o engine.o
 CC     = gcc
-CFLAGS  = -std=c18 -Wall -Wno-unused-function
+CFLAGS = -std=c18 -Wall -Wno-unused-function
 
 LDFLAGS :=
 ifeq ($(OS),Windows_NT)

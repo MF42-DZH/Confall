@@ -11,7 +11,10 @@
 #define STATE_LEVEL      1
 #define STATE_LEVELEND   2
 
-void updateAll( Field* field, int state );
-void renderAll( Field* field );
+void updateall( Field* field, int state );
+void renderall( Field* field );
+
+long getscore( int blocks );
+long getbonusscore( int blocks, int lines, int level );
 
 #endif // ENGINE_H_
