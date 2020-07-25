@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 // Debug print. Only active when the DEBUGGING flag is set.
 static void debugprint( const char* str ) {

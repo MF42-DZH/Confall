@@ -6,13 +6,17 @@
 #include "game.h"
 #include "renderer.h"
 #include "colrdef.h"
+#include "history.h"
+#include "components.h"
 
 #define STATE_LEVELSTART 0
 #define STATE_LEVEL      1
 #define STATE_LEVELEND   2
 
-void updateall( Field* field, int state );
-void renderall( Field* field );
+void initgame( int* state );
+void updateall( int* state );
+void renderall( void );
+void denitgame( void );
 
 long getscore( int blocks );
 long getbonusscore( int blocks, int lines, int level );
