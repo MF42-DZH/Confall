@@ -13,7 +13,7 @@
 #define STATE_LEVEL      1
 #define STATE_LEVELEND   2
 
-void initgame( int* state );
+void initgame( int diff, int* state );
 void updateall( int* state );
 void renderall( void );
 void denitgame( void );
